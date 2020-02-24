@@ -11,7 +11,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  azureSubscription: '160a804a-ab3b-4d4d-ac48-0d575a8dc8f0'
+  azureSubscription: 'Visual Studio Professional'
   appName: 'pipelineapp1'
 
 
