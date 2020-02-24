@@ -34,10 +34,10 @@ steps:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
     artifactName: 'myWebsiteName4'
 
-- task: AzureWebApp@1
-  displayName: 'Azure Web App Deploy'
+- task: AzureRmWebAppDeployment@4
   inputs:
-    azureSubscription: $(azureSubscription)
-    appType: webAppLinux
-    appName: $(appName)
-    package: $(System.ArtifactsDirectory)/**/*.zip
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+    appType: 'webAppLinux'
+    WebAppName: 'pipelineapp1'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
