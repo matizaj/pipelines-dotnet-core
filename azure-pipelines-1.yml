@@ -23,13 +23,6 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
 
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
-    appType: 'webAppLinux'
-    appName: 'pipelineapp1'
-    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
-
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
@@ -38,3 +31,8 @@ steps:
     WebAppName: 'pipelineapp1'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
     RuntimeStack: 'DOTNETCORE|2.2'
+
+- task: Docker@2
+  inputs:
+    command: 'build'
+    Dockerfile: '**/Dockerfile'
