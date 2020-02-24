@@ -16,6 +16,6 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
-- script: echo $(Build.ArtifactStagingDirectory)
-- script: echo $(System.DefaultDirectory)
+- script: ls
+- script: dir
 - script: echo $(Build.Repository.Localpath)
