@@ -12,7 +12,7 @@ pool:
 variables:
   buildConfiguration: 'Release'
   imageName: 'pipelines-docker'
-  serviceConnection: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)''
+  serviceConnection: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
