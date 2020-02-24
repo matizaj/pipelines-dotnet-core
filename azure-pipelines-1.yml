@@ -44,3 +44,12 @@ steps:
   inputs:
     command: login
     containerRegistry: dockerConnection
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'dockerConnection'
+    command: 'push'
+    repository: contosoRepository
+    tags: |
+      tag1
+      tag2
