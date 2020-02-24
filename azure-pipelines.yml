@@ -11,7 +11,8 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-
+  azureSubscription: '160a804a-ab3b-4d4d-ac48-0d575a8dc8f0'
+  appName: 'pipelineapp1'
 
 
 
@@ -32,3 +33,11 @@ steps:
   inputs:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
     artifactName: 'myWebsiteName4'
+
+- task: AzureWebApp@1
+  displayName: 'Azure Web App Deploy'
+  inputs:
+    azureSubscription: $(azureSubscription)
+    appType: webAppLinux
+    appName: $(appName)
+    package: $(System.ArtifactsDirectory)/**/*.zip
