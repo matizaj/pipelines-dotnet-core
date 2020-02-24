@@ -35,6 +35,6 @@ steps:
 - task: Docker@2
   inputs:
     command: 'build'
-    Dockerfile: 'app/Dockerfile'
+    Dockerfile: 'Dockerfile'
 
   
