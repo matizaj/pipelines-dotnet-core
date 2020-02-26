@@ -13,12 +13,12 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
-  
-
 - script: echo ' my password is $(PASSWORD)'
 - script: echo '$(USERNAME)'
+
+- task: CmdLine@2
+  inputs:
+    script: 'az group create -l westus -n MyResourceGroup'
 
 - task: AzureCLI@2
   inputs:
