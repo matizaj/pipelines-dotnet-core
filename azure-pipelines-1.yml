@@ -35,9 +35,12 @@ steps:
     RuntimeStack: 'DOTNETCORE|2.2'
 
 - task: Docker@2
+  displayName: Build docker image
   inputs:
     command: 'build'
     Dockerfile: 'Dockerfile'
+    tags: 'pipeline-app:$(Build.BuildId)'
+
 - task: CmdLine@2
   displayName: List  name of images and containers
   inputs:
