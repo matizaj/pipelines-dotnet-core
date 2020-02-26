@@ -12,8 +12,11 @@ pool:
 variables:
 - group: azure-aci
 
+
+
 steps:
 - script: echo $(USERNAME)
+- script: $(USERNAME)
 
 - task: CmdLine@2
   inputs:
