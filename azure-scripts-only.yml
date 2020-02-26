@@ -10,8 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  buildConfiguration: 'Release'
-  group: azure-aci
+- group: azure-aci
 
 steps:
 - script: echo $(USERNAME)
