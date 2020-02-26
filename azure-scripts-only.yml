@@ -17,7 +17,7 @@ steps:
   displayName: 'dotnet build $(buildConfiguration)'
 
 - script: echo $(Build.Repository.Localpath)
-- script: $env:LOGIN_SERVER
-- script: echo $(PASSWORD)
+- script: $LOGIN_SERVER
+- script: $(PASSWORD)
 - script: echo $(USERNAME)
 
