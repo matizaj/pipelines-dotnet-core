@@ -16,10 +16,8 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
-- script: ls
-- script: dir
 - script: echo $(Build.Repository.Localpath)
-- script: echo $env:LOGIN_SERVER
+- script: $env:LOGIN_SERVER
 - script: echo $(PASSWORD)
 - script: echo $(USERNAME)
 
