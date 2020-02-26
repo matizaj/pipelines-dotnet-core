@@ -38,7 +38,13 @@ steps:
   inputs:
     command: 'build'
     Dockerfile: 'Dockerfile'
-
+- task: CmdLine@2
+  displayName: List  name of images and containers
+  inputs:
+    script: |
+      echo docker images
+      
+      echo docker ps -a
 - task: Docker@2
   displayName: Login to ACR
   inputs:
