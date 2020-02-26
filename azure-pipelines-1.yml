@@ -43,7 +43,7 @@ steps:
 - task: Docker@2
   displayName: Build docker image
   inputs:
-    command: 'build'
+    command: 'buildAndPush'
     Dockerfile: 'Dockerfile'
     repository: pipelinenoetapp.azurecr.io/pipelinenoetapp
     tags: '$(Build.BuildId)'
