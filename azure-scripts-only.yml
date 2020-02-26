@@ -18,7 +18,12 @@ steps:
 
 - task: CmdLine@2
   inputs:
+    script: 'az login -u trbc37@motorolasolutions.com  -p C#developerr022'
+
+- task: CmdLine@2
+  inputs:
     script: 'az group create -l westus -n MyResourceGroup'
+
 
 - task: AzureCLI@2
   inputs:
