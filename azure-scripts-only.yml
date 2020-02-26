@@ -14,8 +14,7 @@ variables:
   group: aci
 
 steps:
-- script: echo ' my password is $(PASSWORD)'
-- script: echo '$(USERNAME)'
+- script: echo $(USERNAME)
 - script: '$(USERNAME)'
 - script: $(USERNAME)
 
