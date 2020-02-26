@@ -11,10 +11,13 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  group: aci
 
 steps:
 - script: echo ' my password is $(PASSWORD)'
 - script: echo '$(USERNAME)'
+- script: '$(USERNAME)'
+- script: $(USERNAME)
 
 - task: CmdLine@2
   inputs:
