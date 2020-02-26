@@ -18,6 +18,6 @@ steps:
 
 - script: echo $(Build.Repository.Localpath)
 - script: $LOGIN_SERVER
-- script: $(PASSWORD)
-- script: echo $(USERNAME)
+- script: $PASSWORD
+- script: echo $USERNAME
 
