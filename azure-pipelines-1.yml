@@ -11,8 +11,9 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  imageName: 'pipelines-docker'
+  imageName: 'pipelinenoetapp'
   serviceConnection: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+  RESOURCE_GROUP: 'pipeline'
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
@@ -28,7 +29,7 @@ steps:
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
-    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+    azureSubscription: '$(serviceConnection)'
     appType: 'webAppLinux'
     WebAppName: 'pipelineapp1'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
@@ -48,11 +49,18 @@ steps:
     repository: pipelinenoetapp.azurecr.io/pipelinenoetapp
     tags: '$(Build.BuildId)'
 
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+    scriptType: 'ps'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az container create --resource-group $(RESOURCE_GROUP) --name $(imageName) --image $(LOGIN_SERVER)/$(imageName) --cpu 1 --memory 1 --registry-login-server $(LOGIN_SERVER) --registry-username $(USERNAME) --registry-password $(PASSWORD) --dns-name-label pipelinedeploytest --ports 80'
+
+
 - task: CmdLine@2
   displayName: List  name of images and containers
   inputs:
     script: |
-      docker images
-      
+      docker images      
       docker ps -a
 
