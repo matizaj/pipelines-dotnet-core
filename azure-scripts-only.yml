@@ -19,7 +19,7 @@ steps:
 - script: ls
 - script: dir
 - script: echo $(Build.Repository.Localpath)
-- script: echo $(LOGIN_SERVER)
+- script: echo $env:LOGIN_SERVER
 - script: echo $(PASSWORD)
 - script: echo $(USERNAME)
 
