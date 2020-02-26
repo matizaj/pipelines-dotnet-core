@@ -11,12 +11,10 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  group: aci
+  group: azure-aci
 
 steps:
 - script: echo $(USERNAME)
-- script: '$(USERNAME)'
-- script: $(USERNAME)
 
 - task: CmdLine@2
   inputs:
@@ -24,7 +22,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'az group create -l westus -n MyResourceGroup'
+    script: 'az group create -l westus -n $(USERNAME)'
 
 - task: CmdLine@2
   inputs:
