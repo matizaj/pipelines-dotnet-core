@@ -15,9 +15,8 @@ variables:
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
-
-- script: echo $(Build.Repository.Localpath)
-- script: $LOGIN_SERVER
-- script: $PASSWORD
-- script: echo $USERNAME
+  
+- script: '$(LOGIN_SERVER)'
+- script: echo ' my password is $(PASSWORD)'
+- script: echo '$(USERNAME)'
 
