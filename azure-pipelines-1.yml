@@ -49,6 +49,13 @@ steps:
     repository: pipelinenoetapp.azurecr.io/pipelinenoetapp
     tags: '$(Build.BuildId)'
 
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+    scriptType: 'ps'
+    scriptLocation: 'scriptPath'
+    scriptPath: '$(System.DefaultWorkingDirectory)/script.ps1'
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
