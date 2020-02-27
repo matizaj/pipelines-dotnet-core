@@ -11,28 +11,18 @@ pool:
 
 variables:
 - group: azure-aci
+- name: buildConfiguration
+  value: Release
 
 
 
 steps:
 - script: echo $(USERNAME)
-- script: $(USERNAME)
 
-- task: CmdLine@2
-  inputs:
-    script: 'az login'
-
-- task: CmdLine@2
-  inputs:
-    script: 'az group create -l westus -n $(USERNAME)'
-
-- task: CmdLine@2
-  inputs:
-    script: 'az group create -l westus -n MyResourceGroup'
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
     scriptType: 'ps'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az group create -l westus -n MyResourceGroup'
+    inlineScript: 'az group create -l westus -n MyResourceGroupPowerShell'
 
