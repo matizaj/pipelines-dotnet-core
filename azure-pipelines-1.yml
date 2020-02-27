@@ -76,5 +76,5 @@ steps:
     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az container create --resource-group $(RESOURCE_GROUP) --name $(imageName) --image $(dummy)/$(imageName) --cpu 1 --memory 1 --registry-login-server $(dummy) --registry-username $(USERNAME) --registry-password $(PASSWORD) --dns-name-label pipelinedeploytest --ports 80'
+    inlineScript: 'az container create --resource-group $(RESOURCE_GROUP) --name $(imageName) --image $(dummy)/$(imageName):latest --cpu 1 --memory 1 --registry-login-server $(dummy) --registry-username $(USERNAME) --registry-password $(PASSWORD) --dns-name-label pipelinedeploytest --ports 80'
 
