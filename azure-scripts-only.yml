@@ -10,12 +10,31 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  buildConfiguration: 'Release'
+- group: azure-aci
+- name: buildConfiguration
+  value: Release
+
+
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- script: echo $(USERNAME)
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az group create -l westus -n MyResourceGroupBatch'
+# - task: AzureCLI@2
+#   inputs:
+#     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+#     scriptType: 'batch'
+#     scriptLocation: 'inlineScript'
+#     inlineScript: 'az group create -l westus -n MyResourceGroupBatch'
 
-- script: ls
-- script: dir
-- script: echo $(Build.Repository.Localpath)
+# - task: AzureCLI@2
+#   inputs:
+#     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+#     scriptType: 'ps'
+#     scriptLocation: 'inlineScript'
+#     inlineScript: 'az group create -l westus -n MyResourceGroupPowerShell'
+
