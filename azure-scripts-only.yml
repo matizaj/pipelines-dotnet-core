@@ -38,6 +38,6 @@ steps:
     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az acr repository show -n $(dummy) --image $(USERNAME) --output table'
+    inlineScript: 'az acr repository show -n pipelinenoetapp --image $(USERNAME) --output table'
 
 
