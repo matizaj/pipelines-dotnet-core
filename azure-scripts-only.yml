@@ -18,18 +18,26 @@ variables:
 
 steps:
 - script: echo $(USERNAME)
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: 'az group create -l westus -n MyResourceGroupBatch'
+- script: echo $(dummy)
+
+# its working, no need to create a lot of RG
+# - task: AzureCLI@2
+#   inputs:
+#     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+#     scriptType: 'bash'
+#     scriptLocation: 'inlineScript'
+#     inlineScript: 'az group create -l westus -n MyResourceGroupBatch'
 
 - task: CmdLine@2
   inputs:
     script: 'echo $(dummy)'
 
-- task: CmdLine@2
+
+- task: AzureCLI@2
   inputs:
-    script: 'az acr show --name $ACR_NAME --resource-group pipeline--query "loginServer" --output tsv'
+    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az acr show --name $ACR_NAME --resource-group pipeline--query "loginServer" --output tsv'
+
 
