@@ -69,7 +69,7 @@ steps:
 - task: CmdLine@2
   displayName: ACR server name
   inputs:
-    script: echo $(ACR_NAME)
+    script: echo $(dummy)
 
 - task: AzureCLI@2
   inputs:
