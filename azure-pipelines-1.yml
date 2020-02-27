@@ -51,7 +51,7 @@ steps:
   inputs:
     command: 'buildAndPush'
     Dockerfile: 'Dockerfile'
-    repository: pipelinenoetapp.azurecr.io/pipelinenoetapp
+    repository: $(LOGIN_SERVER)/$(USERNAME)
     tags: '$(Build.BuildId)'
 
 - task: CmdLine@2
