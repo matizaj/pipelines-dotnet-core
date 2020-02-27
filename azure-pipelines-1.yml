@@ -51,7 +51,7 @@ steps:
   inputs:
     command: 'buildAndPush'
     Dockerfile: 'Dockerfile'
-    repository: $(dummy)/$(USERNAME)
+    repository: $(ACR_NAME)/$(USERNAME)
     tags: '$(Build.BuildId)'
 
 - task: CmdLine@2
@@ -69,12 +69,12 @@ steps:
 - task: CmdLine@2
   displayName: ACR server name
   inputs:
-    script: echo $(dummy)
+    script: echo $(ACR_NAME)
 
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az container create --resource-group $(RESOURCE_GROUP) --name $(imageName) --image $(dummy)/$(imageName) --cpu 1 --memory 1 --registry-login-server $(dummy) --registry-username $(USERNAME) --registry-password $(PASSWORD) --dns-name-label pipelinedeploytest --ports 80'
+    inlineScript: 'az container create --resource-group $(RESOURCE_GROUP) --name $(imageName) --image $(ACR_NAME)/$(imageName) --cpu 1 --memory 1 --registry-login-server $(ACR_NAME) --registry-username $(USERNAME) --registry-password $(PASSWORD) --dns-name-label pipelinedeploytest --ports 8080'
 
