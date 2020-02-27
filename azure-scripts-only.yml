@@ -38,6 +38,6 @@ steps:
     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az acr repository show-tags --name $(ACR_NAME) --repository $(USERNAME) --output table'
+    inlineScript: 'az acr repository show-tags --name pipelinenoetapp --repository $(USERNAME) --output table'
 
 
