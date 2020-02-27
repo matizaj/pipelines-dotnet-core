@@ -1,0 +1,1 @@
+az container create --resource-group $(RESOURCE_GROUP) --name $(imageName) --image $(LOGIN_SERVER)/$(imageName) --cpu 1 --memory 1 --registry-login-server $(LOGIN_SERVER) --registry-username $(USERNAME) --registry-password $(PASSWORD) --dns-name-label pipelinedeploytest --ports 80
