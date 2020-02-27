@@ -67,9 +67,12 @@ steps:
     script: echo $(Build.Repository.Name)
 
 - task: CmdLine@2
-  displayName: ACR server name
   inputs:
-    script: 'echo $(dummy)'
+    script: |
+      echo $(dummy)
+      echo $(ACR_NAME)
+      echo $(PASSWORD)
+      echo $(USERNAME)
 
 - task: AzureCLI@2
   inputs:
@@ -78,3 +81,11 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: 'az container create --resource-group $(RESOURCE_GROUP) --name $(imageName) --image $(dummy)/$(imageName):latest --cpu 1 --memory 1 --registry-login-server $(dummy) --registry-username $(USERNAME) --registry-password $(PASSWORD) --dns-name-label pipelinedeploytest --ports 80'
 
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      
+      Write-Host "Hello World"
