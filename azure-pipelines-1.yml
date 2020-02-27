@@ -10,11 +10,15 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  buildConfiguration: 'Release'
--  group: azure-aci
-  imageName: 'pipelinenoetapp'
-  serviceConnection: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
-  RESOURCE_GROUP: 'pipeline'
+  - group: azure-aci
+  - name: buildConfiguration
+    value: Release
+  - name: serviceConnection
+    value: Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)
+  - name: RESOURCE_GROUP
+    value: pipeline
+  - name: imageName
+    value: pipelinenoetapp   
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
