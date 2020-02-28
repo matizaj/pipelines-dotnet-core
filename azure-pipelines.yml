@@ -10,34 +10,81 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  buildConfiguration: 'Release'
-  azureSubscription: 'Visual Studio Professional (160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
-  appName: 'pipelineapp1'
-
-
+  - group: azure-aci
+  - name: buildConfiguration
+    value: Release
+  - name: serviceConnection
+    value: Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)
+  - name: RESOURCE_GROUP
+    value: pipeline
+  - name: imageName
+    value: pipelinenoetapp   
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
-
 - task: DotNetCoreCLI@2
   inputs:
-    command: publish
-    publishWebProjects: True
+    command: 'publish'
+    publishWebProjects: true
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
 
-# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: 'myWebsiteName4'
+# - task: AzureRmWebAppDeployment@4
+#   inputs:
+#     ConnectionType: 'AzureRM'
+#     azureSubscription: '$(serviceConnection)'
+#     appType: 'webAppLinux'
+#     WebAppName: 'pipelineapp1'
+#     packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+#     RuntimeStack: 'DOTNETCORE|2.2'
 
-- task: AzureRmWebAppDeployment@4
+- task: Docker@2
+  displayName: Login to ACR
   inputs:
-    ConnectionType: 'AzureRM'
+    command: login
+    containerRegistry: dockerConnection
+
+- task: Docker@2
+  displayName: Build docker image
+  inputs:
+    command: 'buildAndPush'
+    Dockerfile: 'Dockerfile'
+    repository: $(dummy)/$(USERNAME)
+    tags: '$(Build.BuildId)'
+
+- task: CmdLine@2
+  displayName: List  name of images and containers
+  inputs:
+    script: |
+      docker images      
+      docker ps -a
+
+- task: CmdLine@2
+  displayName: Name of repository
+  inputs:
+    script: echo $(Build.Repository.Name)
+
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo $(dummy)
+      echo $(ACR_NAME)
+      echo $(PASSWORD)
+      echo $(USERNAME)
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      
+      Write-Host "Hello World"
+- task: AzureCLI@2
+  inputs:
     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
-    appType: 'webAppLinux'
-    WebAppName: 'pipelineapp1'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az container create --resource-group $(RESOURCE_GROUP) --name $(imageName) --image pipelinenoetapp.azurecr.io/$(imageName):$(Build.BuildId) --cpu 1 --memory 1 --registry-login-server pipelinenoetapp.azurecr.io --registry-username $(USERNAME) --registry-password $(PASSWORD) --dns-name-label pipelinedeploytest --ports 80'
+
