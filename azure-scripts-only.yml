@@ -63,5 +63,5 @@ steps:
     inlineScript: |
       SERVICE_PRINCIPAL_NAME=https://VisualStudio/SPN94662d0a-cfb1-4cb0-bd79-bdece183481a
       ACR_REGISTRY_ID=$(az acr show --name $(ACR_N) --query id --output tsv)
-      echo ACR_REGISTRY_ID
+      echo $(ACR_REGISTRY_ID)
       az role assignment create --assignee $(SERVICE_PRINCIPAL_ID) --scope $(ACR_REGISTRY_ID) --role acrpull
