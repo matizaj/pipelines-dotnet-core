@@ -19,6 +19,8 @@ variables:
   value: https://VisualStudio/SPN94662d0a-cfb1-4cb0-bd79-bdece183481a
 - name: ACR_N
   value: pipelinenoetapp
+- name: ACR_REG_ID
+  value: /subscriptions/160a804a-ab3b-4d4d-ac48-0d575a8dc8f0/resourceGroups/pipeline/providers/Microsoft.ContainerRegistry/registries/pipelinenoetapp
 
 
 
@@ -71,6 +73,6 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: |
       SERVICE_PRINCIPAL_NAME=https://VisualStudio/SPN94662d0a-cfb1-4cb0-bd79-bdece183481a
-      ACR_REGISTRY_ID=$(az acr show --name $(ACR_N) --query id --output tsv)
-      echo $(ACR_REGISTRY_ID)
-      az role assignment create --assignee $(SERVICE_PRINCIPAL_ID) --scope $(ACR_REGISTRY_ID) --role acrpull
+      # ACR_REGISTRY_ID=$(az acr show --name $(ACR_N) --query id --output tsv)
+      echo $(ACR_REG_ID)
+      az role assignment create --assignee $(SERVICE_PRINCIPAL_ID) --scope $(ACR_REG_ID) --role acrpull
