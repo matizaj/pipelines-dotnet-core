@@ -13,6 +13,12 @@ variables:
 - group: azure-aci
 - name: buildConfiguration
   value: Release
+- name: SERVICE_PRINCIPAL_ID
+  value: 49077e98-3b66-495c-9452-13b9f69caf16
+- name: SERVICE_PRINCIPAL_NAME
+  value: https://VisualStudio/SPN94662d0a-cfb1-4cb0-bd79-bdece183481a
+- name: ACR_N
+  value: pipelinenoetapp
 
 
 
@@ -34,10 +40,28 @@ steps:
 
 
 - task: AzureCLI@2
+  displayName: Show ACR 
   inputs:
     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: 'az acr repository show -n pipelinenoetapp --repository pipelinenoetapp.azurecr.io/pipelinenoetapp'
 
+- task: AzureCLI@2
+  displayName: Role assingment
+  inputs:
+    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az role assignment list'
 
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      SERVICE_PRINCIPAL_NAME=https://VisualStudio/SPN94662d0a-cfb1-4cb0-bd79-bdece183481a
+      ACR_REGISTRY_ID=$(az acr show --name $(ACR_N) --query id --output tsv)
+      echo ACR_REGISTRY_ID
+      az role assignment create --assignee $(SERVICE_PRINCIPAL_ID) --scope $(ACR_REGISTRY_ID) --role acrpull
