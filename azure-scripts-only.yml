@@ -14,7 +14,7 @@ variables:
 - name: buildConfiguration
   value: Release
 - name: SERVICE_PRINCIPAL_ID
-  value: 49077e98-3b66-495c-9452-13b9f69caf16
+  value: 77e191d7-8b96-45ac-bf33-7311f7cc9049
 - name: SERVICE_PRINCIPAL_NAME
   value: https://VisualStudio/SPN94662d0a-cfb1-4cb0-bd79-bdece183481a
 - name: ACR_N
@@ -71,13 +71,13 @@ steps:
     containerRegistry: 'acrServiceConnection'
     command: 'login'
 
-# - task: AzureCLI@2
-#   inputs:
-#     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
-#     scriptType: 'bash'
-#     scriptLocation: 'inlineScript'
-#     inlineScript: |
-#       SERVICE_PRINCIPAL_NAME=https://VisualStudio/SPN94662d0a-cfb1-4cb0-bd79-bdece183481a
-#       # ACR_REGISTRY_ID=$(az acr show --name $(ACR_N) --query id --output tsv)
-#       echo $(ACR_REG_ID)
-#       az role assignment create --assignee $(SERVICE_PRINCIPAL_ID) --scope $(ACR_REG_ID) --role acrpull
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+       SERVICE_PRINCIPAL_NAME=https://VisualStudio/SPN94662d0a-cfb1-4cb0-bd79-bdece183481a
+       # ACR_REGISTRY_ID=$(az acr show --name $(ACR_N) --query id --output tsv)
+       echo $(ACR_REG_ID)
+       az role assignment create --assignee $(SERVICE_PRINCIPAL_ID) --scope $(ACR_REG_ID) --role acrpull
