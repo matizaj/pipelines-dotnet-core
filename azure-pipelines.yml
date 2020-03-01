@@ -18,7 +18,7 @@ variables:
   - name: RESOURCE_GROUP
     value: pipeline
   - name: imageName
-    value: pipelinenoetapp   
+    value: pipelineapp   
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
@@ -44,7 +44,7 @@ steps:
   displayName: Login to ACR
   inputs:
     command: login
-    containerRegistry: dockerConnection
+    containerRegistry: acrPipelineConnection
 
 - task: Docker@2
   displayName: Build docker image
@@ -85,7 +85,7 @@ steps:
 - task: Docker@2
   displayName: Login to ACR
   inputs:
-    containerRegistry: 'acrServiceConnection'
+    containerRegistry: 'acrPipelineConnection'
     command: 'login'
 - task: AzureCLI@2
   inputs:
