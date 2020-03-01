@@ -71,6 +71,10 @@ steps:
     containerRegistry: 'acrServiceConnection'
     command: 'login'
 
+- task: CmdLine@2
+  inputs:
+    script: 'az ad sp list --show-mine'
+
 - task: AzureCLI@2
   displayName: Create Cluster AKS
   inputs:
