@@ -88,25 +88,25 @@ steps:
     containerRegistry: 'acrPipelineConnection'
     command: 'login'
 
-- task: AzureCLI@2
-  displayName: az login
-  inputs:
-    azureSubscription: 'piprliprSpConn'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: 'az login'
-
-- task: AzureCLI@2
-  displayName: az ad sp show
-  inputs:
-    azureSubscription: 'piprliprSpConn'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: 'az ad sp list --show-mine'
 # - task: AzureCLI@2
+#   displayName: az login
 #   inputs:
-#     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+#     azureSubscription: 'piprliprSpConn'
 #     scriptType: 'bash'
 #     scriptLocation: 'inlineScript'
-#     inlineScript: 'az container create --resource-group $(RESOURCE_GROUP) --name $(imageName) --image pipelinenoetapp.azurecr.io/$(imageName):$(Build.BuildId)  --registry-login-server pipelinenoetapp.azurecr.io --registry-username $(USERNAME) --registry-password $(PASSWORD) --dns-name-label pipelinedeploytest --ports 80'
+#     inlineScript: 'az login'
+
+# - task: AzureCLI@2
+#   displayName: az ad sp show
+#   inputs:
+#     azureSubscription: 'piprliprSpConn'
+#     scriptType: 'bash'
+#     scriptLocation: 'inlineScript'
+#     inlineScript: 'az ad sp list --show-mine'
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'piprliprSpConn'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: 'az container create --resource-group $(RESOURCE_GROUP) --name $(imageName) --image pipelineapp.azurecr.io/$(imageName):$(Build.BuildId)  --registry-login-server pipelineapp.azurecr.io --registry-username $(USERNAME) --registry-password $(PASSWORD) --dns-name-label pipelinedeploytest --ports 80'
 
