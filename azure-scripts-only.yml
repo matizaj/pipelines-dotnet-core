@@ -67,11 +67,13 @@ steps:
 #       az acr show --name $(ACR_N) --query id --output tsv
 
 - task: Docker@2
+  displayName: Login to acrServiceConnection
   inputs:
     containerRegistry: 'acrServiceConnection'
     command: 'login'
 
 - task: CmdLine@2
+  displayName: Service Principal
   inputs:
     script: 'az ad sp list --show-mine'
 
