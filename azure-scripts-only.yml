@@ -41,30 +41,30 @@ steps:
     script: 'echo $(dummy)'
 
 
-- task: AzureCLI@2
-  displayName: Show ACR 
-  inputs:
-    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: 'az acr repository show -n pipelinenoetapp --repository pipelinenoetapp.azurecr.io/pipelinenoetapp'
+# - task: AzureCLI@2
+#   displayName: Show ACR 
+#   inputs:
+#     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+#     scriptType: 'bash'
+#     scriptLocation: 'inlineScript'
+#     inlineScript: 'az acr repository show -n pipelinenoetapp --repository pipelinenoetapp.azurecr.io/pipelinenoetapp'
 
-- task: AzureCLI@2
-  displayName: Role assingment
-  inputs:
-    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: 'az role assignment list'
+# - task: AzureCLI@2
+#   displayName: Role assingment
+#   inputs:
+#     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+#     scriptType: 'bash'
+#     scriptLocation: 'inlineScript'
+#     inlineScript: 'az role assignment list'
 
-- task: AzureCLI@2
-  displayName: Test ACR_REGISTRY_ID
-  inputs:
-    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      az acr show --name $(ACR_N) --query id --output tsv
+# - task: AzureCLI@2
+#   displayName: Test ACR_REGISTRY_ID
+#   inputs:
+#     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+#     scriptType: 'bash'
+#     scriptLocation: 'inlineScript'
+#     inlineScript: |
+#       az acr show --name $(ACR_N) --query id --output tsv
 
 - task: Docker@2
   inputs:
@@ -75,14 +75,14 @@ steps:
   inputs:
     script: 'az ad sp list --show-mine'
 
-- task: AzureCLI@2
-  displayName: Create Cluster AKS
-  inputs:
-    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      az aks create --resource-group pipeline --name myAKSCluster --node-count 2 --generate-ssh-keys  --attach-acr pipelinenoetapp
+# - task: AzureCLI@2
+#   displayName: Create Cluster AKS
+#   inputs:
+#     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+#     scriptType: 'bash'
+#     scriptLocation: 'inlineScript'
+#     inlineScript: |
+#       az aks create --resource-group pipeline --name myAKSCluster --node-count 2 --generate-ssh-keys  --attach-acr pipelinenoetapp
 
 # - task: AzureCLI@2
 #   inputs:
