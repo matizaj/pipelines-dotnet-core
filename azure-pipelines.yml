@@ -87,10 +87,17 @@ steps:
   inputs:
     containerRegistry: 'acrPipelineConnection'
     command: 'login'
+
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+    azureSubscription: 'piprliprSpConn'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az container create --resource-group $(RESOURCE_GROUP) --name $(imageName) --image pipelinenoetapp.azurecr.io/$(imageName):$(Build.BuildId)  --registry-login-server pipelinenoetapp.azurecr.io --registry-username $(USERNAME) --registry-password $(PASSWORD) --dns-name-label pipelinedeploytest --ports 80'
+    inlineScript: 'az ad sp list'
+# - task: AzureCLI@2
+#   inputs:
+#     azureSubscription: 'Visual Studio Professional(160a804a-ab3b-4d4d-ac48-0d575a8dc8f0)'
+#     scriptType: 'bash'
+#     scriptLocation: 'inlineScript'
+#     inlineScript: 'az container create --resource-group $(RESOURCE_GROUP) --name $(imageName) --image pipelinenoetapp.azurecr.io/$(imageName):$(Build.BuildId)  --registry-login-server pipelinenoetapp.azurecr.io --registry-username $(USERNAME) --registry-password $(PASSWORD) --dns-name-label pipelinedeploytest --ports 80'
 
