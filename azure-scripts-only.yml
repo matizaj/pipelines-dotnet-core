@@ -24,8 +24,9 @@ variables:
 
 steps:
 - script: |
-    set test=dupa
-    echo %test%
+    set temp=4
+    set build=%temp:~4%
+    echo Installer version 0.0.%build%
 
 
 - script: |
