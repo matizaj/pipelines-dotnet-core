@@ -98,3 +98,8 @@ steps:
 #        # ACR_REGISTRY_ID=$(az acr show --name $(ACR_N) --query id --output tsv)
 #        echo $(ACR_REG_ID)
 #        az role assignment create --assignee $(SERVICE_PRINCIPAL_ID) --scope $(ACR_REG_ID) --role acrpull
+
+- task: CmdLine@2
+  displayName: CreateGuid
+  inputs:
+    script: 'powershell -command [guid]::NewGuid().ToString().Substring(0,8)'
