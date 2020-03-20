@@ -25,8 +25,12 @@ variables:
 steps:
 - script: |
     set temp=4
-    set build=%temp:~4%
-    echo Installer version 0.0.%build%
+    echo %temp%
+
+- script: |
+    set var
+    uuidgen > var
+    echo %var%
 
 
 - script: |
