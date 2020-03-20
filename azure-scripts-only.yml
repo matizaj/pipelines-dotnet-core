@@ -99,7 +99,10 @@ steps:
 #        echo $(ACR_REG_ID)
 #        az role assignment create --assignee $(SERVICE_PRINCIPAL_ID) --scope $(ACR_REG_ID) --role acrpull
 
-- task: CmdLine@2
-  displayName: CreateGuid
-  inputs:
-    script: '[guid]::NewGuid().ToString().Substring(0,8)'
+# - task: CmdLine@2
+#   displayName: CreateGuid
+#   inputs:
+#     script: '[guid]::NewGuid().ToString().Substring(0,8)'
+
+- script: |
+    set myguid=[guid]::NewGuid().ToString().Substring(0,8)
