@@ -102,4 +102,4 @@ steps:
 - task: CmdLine@2
   displayName: CreateGuid
   inputs:
-    script: 'powershell -command [guid]::NewGuid().ToString().Substring(0,8)'
+    script: '[guid]::NewGuid().ToString().Substring(0,8)'
