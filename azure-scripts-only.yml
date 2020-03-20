@@ -27,9 +27,8 @@ variables:
 steps:
 - script: echo $(USERNAME)
 - script: |
-    echo $(dummy)
     uuidgen
-    set enckey=uuidgen
+    set enckey=%uuidgen%
     echo gowniany test
     echo enckey
     echo %enckey%
@@ -44,9 +43,9 @@ steps:
 #     scriptLocation: 'inlineScript'
 #     inlineScript: 'az group create -l westus -n MyResourceGroupBatch'
 
-- task: CmdLine@2
-  inputs:
-    script: 'echo $(dummy)'
+# - task: CmdLine@2
+#   inputs:
+#     script: 'echo $(dummy)'
 
 
 # - task: AzureCLI@2
