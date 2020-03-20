@@ -28,7 +28,7 @@ steps:
 - script: echo $(USERNAME)
 - script: |
     echo $(dummy)
-    powershell -command [guid]::NewGuid().ToString().Substring(0,8)
+    powershell 
     
 # its working, no need to create a lot of RG
 # - task: AzureCLI@2
