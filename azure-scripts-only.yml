@@ -24,7 +24,7 @@ variables:
 
 steps:
 - script: |
-    set test="test"
+    set test=dupa
     echo %test%
 
 
