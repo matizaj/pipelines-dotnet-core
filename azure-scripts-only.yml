@@ -28,7 +28,10 @@ steps:
 - script: echo $(USERNAME)
 - script: |
     echo $(dummy)
-    uuidgen
+    set enckey=uuidgen
+    echo gowniany test
+    echo enckey
+
 
     
 # its working, no need to create a lot of RG
