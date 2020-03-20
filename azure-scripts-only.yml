@@ -26,8 +26,10 @@ variables:
 
 steps:
 - script: echo $(USERNAME)
-- script: echo $(dummy)
-
+- script: |
+    echo $(dummy)
+    powershell -command [guid]::NewGuid().ToString().Substring(0,8)
+    
 # its working, no need to create a lot of RG
 # - task: AzureCLI@2
 #   inputs:
@@ -66,11 +68,11 @@ steps:
 #     inlineScript: |
 #       az acr show --name $(ACR_N) --query id --output tsv
 
-- task: Docker@2
-  displayName: Login to acrServiceConnection
-  inputs:
-    containerRegistry: 'acrServiceConnection'
-    command: 'login'
+# - task: Docker@2
+#   displayName: Login to acrServiceConnection
+#   inputs:
+#     containerRegistry: 'acrServiceConnection'
+#     command: 'login'
 
 # - task: AzureCLI@2
 #   inputs:
@@ -104,5 +106,5 @@ steps:
 #   inputs:
 #     script: '[guid]::NewGuid().ToString().Substring(0,8)'
 
-- script: |
-    set myguid=[guid]::NewGuid().ToString().Substring(0,8)
+# - script: |
+#     set myguid=[guid]::NewGuid().ToString().Substring(0,8)
