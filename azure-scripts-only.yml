@@ -29,10 +29,14 @@ steps:
     SET FOO="bar"
     echo %FOO%
     uuidgen
+    echoenckey="uuidgen"
     set enckey="uuidgen"
+    echo key=%uuidgen%
+    set key=%uuidgen%
     echo gowniany test
     echo enckey
     echo %enckey%
+    echo %key%
 
 
     
