@@ -28,9 +28,11 @@ steps:
 - script: echo $(USERNAME)
 - script: |
     echo $(dummy)
+    uuidgen
     set enckey=uuidgen
     echo gowniany test
     echo enckey
+    echo %enckey%
 
 
     
