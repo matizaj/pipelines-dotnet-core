@@ -25,10 +25,11 @@ variables:
 
 
 steps:
-- script: echo $(USERNAME)
 - script: |
+    SET FOO="bar"
+    echo %FOO%
     uuidgen
-    set enckey=%uuidgen%
+    set enckey="uuidgen"
     echo gowniany test
     echo enckey
     echo %enckey%
