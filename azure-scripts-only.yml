@@ -22,14 +22,15 @@ variables:
 - name: ACR_REG_ID
   value: /subscriptions/160a804a-ab3b-4d4d-ac48-0d575a8dc8f0/resourceGroups/pipeline/providers/Microsoft.ContainerRegistry/registries/pipelinenoetapp
 
-
-
 steps:
 - script: |
-    SET FOO="bar"
-    echo %FOO%
+    set test="test"
+    echo %test%
+
+
+- script: |
     uuidgen
-    echoenckey="uuidgen"
+    echo enckey="uuidgen"
     set enckey="uuidgen"
     echo key=%uuidgen%
     set key=%uuidgen%
