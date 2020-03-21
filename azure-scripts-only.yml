@@ -26,9 +26,13 @@ steps:
 - script: |
     set temp=4
     echo %temp%
+- script: |
+    uuidgen
+    set /A var=uuidgen
+    echo %var%
 
 - script: |
-    set var=$(uuidgen)
+    set /A var=$(uuidgen)
     echo %var%
     echo $var
     echo "$var"
