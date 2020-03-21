@@ -24,12 +24,13 @@ variables:
 
 steps:
 - script: |
-    set temp=4
-    echo %temp%
+    dir
+    
 
 - script: |
-    echo uuidgen
-    set /A var=uuidgen
+
+    uuidgen>guid.txt
+    set var=uuidgen
     echo %var%
 
 - script: |
