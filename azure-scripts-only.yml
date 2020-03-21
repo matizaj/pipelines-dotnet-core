@@ -24,7 +24,7 @@ variables:
 
 steps:
 - script: |
-    dir
+    ls
     
 
 - script: |
