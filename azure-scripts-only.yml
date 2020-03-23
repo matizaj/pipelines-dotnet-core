@@ -24,12 +24,9 @@ variables:
 
 steps:
 - script: |
-    ls
-    uuidgen>test.txt
-    set file=..\test.txt
-    for /f "tokens=*" %%A in (%file%) do (set cmd=%%A)
-    echo %cmd%
-
+    uuidgen
+    set key=$(uuidgen)
+    echo "$key"
     
 
 - script: |
