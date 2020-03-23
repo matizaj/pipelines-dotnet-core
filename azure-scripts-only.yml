@@ -24,7 +24,7 @@ variables:
 
 steps:
 - script: |
-    uuidgen
+    uuidgen>>text.txt
     set dupa=$(uuidgen)
     echo $dupa
     echo "$dupa"
