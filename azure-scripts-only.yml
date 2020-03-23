@@ -25,6 +25,14 @@ variables:
 steps:
 - script: |
     uuidgen
+    set dupa=$(uuidgen)
+    echo $dupa
+    echo "$dupa"
+    echo '$dupa'
+
+
+- script: |
+    uuidgen
     for /f "tokens=* USEBACKQ" %%A in (`uuidgen`) do (set key=%%A)
     echo %key%
     
