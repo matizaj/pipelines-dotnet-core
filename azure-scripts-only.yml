@@ -25,7 +25,7 @@ variables:
 steps:
 - script: |
     uuidgen
-    for /f "tokens=* USEBACKQ" %%A in (`powershell [guid]::NewGuid().ToString()`) do (set key=%%A)
+    for /f "tokens=* USEBACKQ" %%A in (`uuidgen`) do (set key=%%A)
     echo %key%
     
 
