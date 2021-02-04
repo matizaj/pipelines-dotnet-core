@@ -141,3 +141,11 @@ steps:
 
 # - script: |
 #     set myguid=[guid]::NewGuid().ToString().Substring(0,8)
+- task: CmdLine@2
+  inputs:
+    script: 'dir'
+- task: CmdLine@2
+  inputs:
+    script: |
+      cd /src 
+      dir
